@@ -23,7 +23,17 @@
 
 ## Acknowledgements and References
 
+- [awesome_time_series_in_python](https://github.com/MaxBenChrist/awesome_time_series_in_python)
+  - collection of datasets, libraries, examples, etc.
 
+
+- [deep-learning-time-series](https://github.com/Alro10/deep-learning-time-series)
+  - collection of resources about deep learning time Series forecasting
+    - papers
+    - competitions
+    - codes
+    - ...
+  
 
 ## Folder Structure
 
