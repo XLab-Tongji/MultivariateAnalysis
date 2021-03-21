@@ -1,3 +1,9 @@
+# 武信庭-第一周-TraditionalMethodology
+
+## 本周进度
+
+搜索多变量时间序列数据集传统方法相关资料与可用数据集
+
 ### 多变量时间序列数据集
 
 1. 空气污染数据集: https://github.com/PatientEz/CNN-BiLSTM-Attention-Time-Series-Prediction_Keras
