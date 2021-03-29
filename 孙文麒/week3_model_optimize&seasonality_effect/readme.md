@@ -15,9 +15,9 @@
 
 在将LSTM转为`StandardScaler`后，其预测准确度有明显降低，进行`inverse_transform`后的RMSE达到了65，训练过程中的loss也只有0.55，明显低于Informer。
 
-![image-20210329102358155](C:\Users\Nntraveler\AppData\Roaming\Typora\typora-user-images\image-20210329102358155.png)
+![image-20210329102358155](img\LSTM_loss.png)
 
-![image-20210329102324962](C:\Users\Nntraveler\AppData\Roaming\Typora\typora-user-images\image-20210329102324962.png)
+![image-20210329102324962](img\LSTM_pred.png)
 
 ## Informer
 
@@ -33,7 +33,7 @@
 
 #### 结果：
 
-- ![image-20210324144852411](C:\Users\Nntraveler\AppData\Roaming\Typora\typora-user-images\image-20210324144852411.png)
+- ![image-20210324144852411](img\Informer.png)
 
 ```sh
 mse:0.2799077189809823, mae:0.31754937508108366
