@@ -2,6 +2,7 @@
 
 ### Infomer
 
+https://github.com/zhouhaoyi/Informer2020
 - 实验总结
   - MSE结果大约在0.5~0.6左右（未调优）如果去除部分列，例如wnd_dir后能降到约0.3~0.4
   - 符合论文结果
@@ -208,6 +209,9 @@ mse:0.40100106976140504, mae:0.3571412542537687
 ```
 
 ### LSTM
+
+https://github.com/PatientEz/CNN-BiLSTM-Attention-Time-Series-Prediction_Keras
+https://github.com/sagarmk/Forecasting-on-Air-pollution-with-RNN-LSTM
 
 - 实验结果
   - 训练阶段MSE大约在0.001以内
