@@ -60,11 +60,11 @@
 
 > 本部分实验结果都是基于StandardScaler，在pollution上的预测结果，MSE为对多个维度的综合损失计算
 
-| 优化方案                           | MSE    |
-| ---------------------------------- | ------ |
-| 无优化，不进行调参                 | 0.5627 |
-| 优化维度，删除wnd_dir和wind snow列 | 0.2799 |
-| 优化维度，输入参数下调             | 0.2629 |
+| 优化方案                           | 参数                                  | MSE    |
+| ---------------------------------- | ------------------------------------- | ------ |
+| 无优化，不进行调参                 | seq_len=72, label_len=36, pred_len=24 | 0.5627 |
+| 优化维度，删除wnd_dir和wind snow列 | seq_len=72, label_len=36, pred_len=24 | 0.2799 |
+| 优化维度，输入参数下调             | seq_len=48, label_len=24, pred_len=24 | 0.2629 |
 
 ## 2 LSTM
 
@@ -109,8 +109,8 @@ jupyter notebook --port 12001 --ip 0.0.0.0 --allow-root
 
 > 本部分实验结果都是在pollution上的单步预测结果，MSE为对目标维度的综合损失计算
 
-| 优化方案                           | MSE/RMSE    |
-| ---------------------------------- | ------ |
-| 基于MinMaxScaler(1,0)                 | MSE:8.9546e-04 |
-| 基于MinMaxScaler(1,0)，进行inverse变换 | RMSE:18 |
-| 基于StandardScaler             | MSE:0.55 |
+| 优化方案                           | 参数                       | MSE/RMSE    |
+| ---------------------------------- | ------ | ------ |
+| 基于MinMaxScaler(1,0)                 | TIME_STEPS=20    | MSE:8.9546e-04 |
+| 基于MinMaxScaler(1,0)，进行inverse变换 | TIME_STEPS=20 | RMSE:18 |
+| 基于StandardScaler             | TIME_STEPS=20 | MSE:0.55 |
