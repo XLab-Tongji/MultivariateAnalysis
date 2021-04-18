@@ -1,0 +1,58 @@
+Use GPU: cuda:0
+>>>>>>>start training : informer_custom_ftS_sl288_ll144_pl144_dm512_nh8_el2_dl1_df2048_atprob_fc5_ebtimeF_dtTrue_exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 8641
+val 1153
+test 2449
+	iters: 100, epoch: 1 | loss: 0.8694109
+	speed: 0.2756s/iter; left time: 419.2397s
+	iters: 200, epoch: 1 | loss: 0.3061160
+	speed: 0.2858s/iter; left time: 406.0887s
+Epoch: 1 cost time: 75.77397513389587
+Epoch: 1, Steps: 270 | Train Loss: 0.7072752 Vali Loss: 0.5464494 Test Loss: 0.1858959
+Validation loss decreased (inf --> 0.546449).  Saving model ...
+Updating learning rate to 0.0001
+	iters: 100, epoch: 2 | loss: 0.1414290
+	speed: 0.5980s/iter; left time: 748.0865s
+	iters: 200, epoch: 2 | loss: 0.2089259
+	speed: 0.2807s/iter; left time: 323.1337s
+Epoch: 2 cost time: 75.50642824172974
+Epoch: 2, Steps: 270 | Train Loss: 0.1787804 Vali Loss: 0.5070947 Test Loss: 0.1401912
+Validation loss decreased (0.546449 --> 0.507095).  Saving model ...
+Updating learning rate to 5e-05
+	iters: 100, epoch: 3 | loss: 0.1218007
+	speed: 0.6020s/iter; left time: 590.5388s
+	iters: 200, epoch: 3 | loss: 0.1354473
+	speed: 0.2796s/iter; left time: 246.3471s
+Epoch: 3 cost time: 75.46482467651367
+Epoch: 3, Steps: 270 | Train Loss: 0.1170588 Vali Loss: 0.4864682 Test Loss: 0.1154922
+Validation loss decreased (0.507095 --> 0.486468).  Saving model ...
+Updating learning rate to 2.5e-05
+	iters: 100, epoch: 4 | loss: 0.1132471
+	speed: 0.6000s/iter; left time: 426.6136s
+	iters: 200, epoch: 4 | loss: 0.0985889
+	speed: 0.2791s/iter; left time: 170.5245s
+Epoch: 4 cost time: 75.31821346282959
+Epoch: 4, Steps: 270 | Train Loss: 0.0986743 Vali Loss: 0.5404923 Test Loss: 0.1320738
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 1.25e-05
+	iters: 100, epoch: 5 | loss: 0.0857545
+	speed: 0.5995s/iter; left time: 264.3657s
+	iters: 200, epoch: 5 | loss: 0.0965415
+	speed: 0.2793s/iter; left time: 95.2501s
+Epoch: 5 cost time: 75.4313268661499
+Epoch: 5, Steps: 270 | Train Loss: 0.0888678 Vali Loss: 0.5111302 Test Loss: 0.1244964
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 6.25e-06
+	iters: 100, epoch: 6 | loss: 0.0827867
+	speed: 0.5994s/iter; left time: 102.5010s
+	iters: 200, epoch: 6 | loss: 0.1002215
+	speed: 0.2801s/iter; left time: 19.8871s
+Epoch: 6 cost time: 75.53893685340881
+Epoch: 6, Steps: 270 | Train Loss: 0.0837339 Vali Loss: 0.5107338 Test Loss: 0.1485666
+EarlyStopping counter: 3 out of 3
+Early stopping
+>>>>>>>testing : informer_custom_ftS_sl288_ll144_pl144_dm512_nh8_el2_dl1_df2048_atprob_fc5_ebtimeF_dtTrue_exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2449
+test shape: (76, 32, 144, 1) (76, 32, 144, 1)
+test shape: (2432, 144, 1) (2432, 144, 1)
+mse:0.11456459760665894, mae:0.22674807906150818

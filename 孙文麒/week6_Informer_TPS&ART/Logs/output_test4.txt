@@ -1,0 +1,58 @@
+Use GPU: cuda:0
+>>>>>>>start training : informer_custom_ftS_sl432_ll144_pl288_dm512_nh8_el2_dl1_df2048_atprob_fc5_ebtimeF_dtTrue_exp_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 8353
+val 1009
+test 2305
+	iters: 100, epoch: 1 | loss: 0.8477529
+	speed: 0.9403s/iter; left time: 1379.3697s
+	iters: 200, epoch: 1 | loss: 0.8218669
+	speed: 0.9463s/iter; left time: 1293.6476s
+Epoch: 1 cost time: 246.8023624420166
+Epoch: 1, Steps: 261 | Train Loss: 0.9384543 Vali Loss: 1.0199826 Test Loss: 0.5447468
+Validation loss decreased (inf --> 1.019983).  Saving model ...
+Updating learning rate to 0.0001
+	iters: 100, epoch: 2 | loss: 0.4202208
+	speed: 2.0280s/iter; left time: 2445.8056s
+	iters: 200, epoch: 2 | loss: 0.4177989
+	speed: 0.9458s/iter; left time: 1046.0974s
+Epoch: 2 cost time: 246.77586126327515
+Epoch: 2, Steps: 261 | Train Loss: 0.4711301 Vali Loss: 1.0120100 Test Loss: 0.3568858
+Validation loss decreased (1.019983 --> 1.012010).  Saving model ...
+Updating learning rate to 5e-05
+	iters: 100, epoch: 3 | loss: 0.2186561
+	speed: 2.0282s/iter; left time: 1916.6906s
+	iters: 200, epoch: 3 | loss: 0.2256765
+	speed: 0.9460s/iter; left time: 799.3835s
+Epoch: 3 cost time: 246.87809371948242
+Epoch: 3, Steps: 261 | Train Loss: 0.2103010 Vali Loss: 0.7766128 Test Loss: 0.2411415
+Validation loss decreased (1.012010 --> 0.776613).  Saving model ...
+Updating learning rate to 2.5e-05
+	iters: 100, epoch: 4 | loss: 0.1471727
+	speed: 2.0290s/iter; left time: 1387.8660s
+	iters: 200, epoch: 4 | loss: 0.1529586
+	speed: 0.9455s/iter; left time: 552.1900s
+Epoch: 4 cost time: 246.84806895256042
+Epoch: 4, Steps: 261 | Train Loss: 0.1487215 Vali Loss: 0.6773832 Test Loss: 0.1670017
+Validation loss decreased (0.776613 --> 0.677383).  Saving model ...
+Updating learning rate to 1.25e-05
+	iters: 100, epoch: 5 | loss: 0.1151740
+	speed: 2.0287s/iter; left time: 858.1350s
+	iters: 200, epoch: 5 | loss: 0.1131490
+	speed: 0.9459s/iter; left time: 305.5264s
+Epoch: 5 cost time: 246.8677294254303
+Epoch: 5, Steps: 261 | Train Loss: 0.1256727 Vali Loss: 0.6644035 Test Loss: 0.1704786
+Validation loss decreased (0.677383 --> 0.664403).  Saving model ...
+Updating learning rate to 6.25e-06
+	iters: 100, epoch: 6 | loss: 0.1336143
+	speed: 2.0295s/iter; left time: 328.7781s
+	iters: 200, epoch: 6 | loss: 0.1177865
+	speed: 0.9466s/iter; left time: 58.6897s
+Epoch: 6 cost time: 247.0051851272583
+Epoch: 6, Steps: 261 | Train Loss: 0.1140851 Vali Loss: 0.6371982 Test Loss: 0.1710815
+Validation loss decreased (0.664403 --> 0.637198).  Saving model ...
+Updating learning rate to 3.125e-06
+>>>>>>>testing : informer_custom_ftS_sl432_ll144_pl288_dm512_nh8_el2_dl1_df2048_atprob_fc5_ebtimeF_dtTrue_exp_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2305
+test shape: (72, 32, 288, 1) (72, 32, 288, 1)
+test shape: (2304, 288, 1) (2304, 288, 1)
+mse:0.17070156335830688, mae:0.25603049993515015
