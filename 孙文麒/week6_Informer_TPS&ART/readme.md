@@ -140,3 +140,17 @@
 |MAE|0.2560|
 
 ![TPS_4_0](./images/TPS_4_0.png)
+
+## 5 修改预测思路
+
+- 阅读`data_loader`源码发现，Informer中并未提供按照原有格式输出预测的接口，需要手动实现。
+- Informer的预测可以将一个csv文件作为输入，输出一个2-D List `preds`，第一维是timestamp对应预测值（0~pred_len），第二维代表预测项。
+- 实现`predict_append`思路如下：
+  - 调用`read_csv`获取待预测数据，并提取最后一个`timedate`，获取一个`time_interval`作为参数。
+  - 将`time_interval`与`last_date`结合，生成`pred_len`个`timedate`作为`timedate`维的数据。
+  - 拼接在preds的第二维中，再逐`timedate`将数据append到原有数据后，保存。
+
+## 6 TODO
+
+- 将修改后的数据\(即去除5:59:00和6:00:00的重复项\)进行处理，按照目前参数进行再次实验，更新结果
+- 按照当前思路，实现`predict_append`方法，并将结果可视化。
