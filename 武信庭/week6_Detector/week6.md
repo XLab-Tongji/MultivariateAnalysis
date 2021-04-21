@@ -1,4 +1,4 @@
-# 武信庭-第五周-Detector
+# 武信庭-第六周-Detector
 
 ## 本周进度
 
@@ -215,7 +215,7 @@ from sklearn.cluster import KMeans
 min_cluster_detector = MinClusterDetector(KMeans(n_clusters=3))
 ```
 
-![../_images/notebooks_demo_48_0.png](C:\Users\zact\OneDrive - tongji.edu.cn\实验室\时间序列分析\image\notebooks_demo_48_0.png)
+![../_images/notebooks_demo_48_0.png](/image/notebooks_demo_48_0.png)
 
 
 
@@ -233,7 +233,7 @@ from sklearn.neighbors import LocalOutlierFactor
 outlier_detector = OutlierDetector(LocalOutlierFactor(contamination=0.05))
 ```
 
-![../_images/notebooks_demo_51_0.png](C:\Users\zact\OneDrive - tongji.edu.cn\实验室\时间序列分析\image\notebooks_demo_51_0.png)
+![../_images/notebooks_demo_51_0.png](image/notebooks_demo_51_0.png)
 
 
 
@@ -254,7 +254,7 @@ from sklearn.linear_model import LinearRegression
 regression_ad = RegressionAD(regressor=LinearRegression(), target="Speed (kRPM)", c=3.0)
 ```
 
-![../_images/notebooks_demo_54_0.png](C:\Users\zact\OneDrive - tongji.edu.cn\实验室\时间序列分析\image\notebooks_demo_54_0.png)
+![../_images/notebooks_demo_54_0.png](image/notebooks_demo_54_0.png)
 
 
 
@@ -272,7 +272,7 @@ from adtk.detector import PcaAD
 pca_ad = PcaAD(k=1)
 ```
 
-![../_images/notebooks_demo_57_0.png](C:\Users\zact\OneDrive - tongji.edu.cn\实验室\时间序列分析\image\notebooks_demo_57_0.png)
+![../_images/notebooks_demo_57_0.png](image/notebooks_demo_57_0.png)
 
 
 
@@ -295,4 +295,4 @@ from adtk.detector import CustomizedDetectorHD
 customized_detector = CustomizedDetectorHD(detect_func=myDetectionFunc)
 ```
 
-![../_images/notebooks_demo_62_0.png](C:\Users\zact\OneDrive - tongji.edu.cn\实验室\时间序列分析\image\notebooks_demo_62_0.png)
+![../_images/notebooks_demo_62_0.png](image/notebooks_demo_62_0.png)
