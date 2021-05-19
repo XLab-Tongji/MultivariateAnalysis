@@ -11,7 +11,7 @@ class CorrelationMeasurement():
 
     def __init__(self, *args):
         if len(args) == 1:
-            self.coTHR = args
+            self.coTHR = args[0]
         else:
             self.coTHR = 0.8
 
