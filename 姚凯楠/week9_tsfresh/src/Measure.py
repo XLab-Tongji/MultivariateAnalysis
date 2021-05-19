@@ -33,6 +33,7 @@ class CorrelationMeasurement():
             summ += Gs[index] * H[index]
         return summ
 
+    # RuntimeWarning: invalid value encountered in double_scalars 分母为零的处理
     def CC(self, G, H, Gs):
         return self.R(Gs, H) / math.sqrt(self.R(G, G) * self.R(H, H))
 
@@ -71,7 +72,7 @@ class CorrelationMeasurement():
         for afx in afx_set:
             for afy in afy_set:
                 result_set.append(self.FCC(self.amplification(0.5, 10, afx), self.amplification(0.5, 10, afy)))
-                print(cnt)
+                # print(cnt)
                 cnt += 1
         maxv = 0
         minv = 0
@@ -83,28 +84,19 @@ class CorrelationMeasurement():
         else:
             ccV, shiftV = min(result_set)
 
-        print(ccV)
-        if abs(ccV) >= self.coTHR[0]:
-            if shiftV == 0:
-                if ccV >= 0:
-                    return 1, 0
-                else:
-                    return -1, 0
-            elif shiftV < 0:
-                if ccV >= 0:
-                    return 1, -1
-                else:
-                    return -1, -1
+        # print(ccV)
+        if abs(ccV) >= self.coTHR:
+            if ccV >= 0:
+                return (1, shiftV)
             else:
-                if ccV >= 0:
-                    return 1, 1
-                else:
-                    return -1, 1
+                return (-1, shiftV)
         else:
-            return 0, 0
+            return (0, 0)
 
 
 if __name__ == '__main__':
+    afx_set =  [[0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0]]
+
     afy_set = [[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
                [[0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0]],
                [[0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0]],
@@ -114,7 +106,13 @@ if __name__ == '__main__':
                [[0, 0, 0, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 0]],
                [[-5, -4, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]
 
-    afx_set = [[0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0]]
     for item in afy_set:
         cm = CorrelationMeasurement()
-        cm.correlation_measurement(afx_set=afx_set, afy_set=item)
+        pos_neg, shift = cm.correlation_measurement(afx_set=afx_set, afy_set=item)
+        if pos_neg == 1:
+            print("pos ", end="")
+        elif pos_neg == -1:
+            print("neg ", end="")
+        else:
+            print("no correlation ", end="")
+        print(shift)

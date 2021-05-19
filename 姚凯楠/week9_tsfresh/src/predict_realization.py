@@ -16,7 +16,6 @@ warnings.filterwarnings('ignore')
 
 def holt_winter_predict(df, column_name, period=24, smoothing_level=0.6, smoothing_trend=0.6,
                         smoothing_seasonal=0.6):
-    global i
     result = []
     train_init_length = period * 7
     # 分段预测 每段预测后24个值 训练长度为24*7
@@ -37,8 +36,8 @@ def holt_winter_predict(df, column_name, period=24, smoothing_level=0.6, smoothi
         l2 = list(test_data[column_name])
         for index in range(len(l1)):
             result.append(l1[index] - l2[index])
-
-    start = 24 * (i + 7 + 1)
+    j = int((len(df) - train_init_length) / period)-1
+    start = 24 * (j + 7 + 1)
     end = len(df)
     last_train_data = df[start - train_init_length:start]
     last_test_data = df[start:end]
