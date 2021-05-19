@@ -36,7 +36,8 @@ def holt_winter_predict(df, column_name, period=24, smoothing_level=0.6, smoothi
         l2 = list(test_data[column_name])
         for index in range(len(l1)):
             result.append(l1[index] - l2[index])
-    j = int((len(df) - train_init_length) / period)-1
+
+    j = int((len(df) - train_init_length) / period) - 1
     start = 24 * (j + 7 + 1)
     end = len(df)
     last_train_data = df[start - train_init_length:start]
@@ -123,30 +124,38 @@ def wavelet(data):
 
 
 def wavelet_predict(df, column_name, length=24 * 1):
+    # 设置500为阈值 再低预测效果不好
+    # 如果length小于500 则设置成500
+    length = max(500, length)
+    # 有了一个最大值之后，确保能和df长度对齐
+    length = min(len(df), length)
     result = []
     df_x = df[column_name]
     number = int(len(df_x) / length)
     for i in range(number):
-        df_temp = df_x[i * length:(i + 1) * length]
+        df_temp = list(df_x[i * length:(i + 1) * length])
         pre_result = wavelet(df_temp)
-        for i in range(len(df_temp)):
-            result.append(pre_result[i] - df_temp[i])
-
-    # plt.plot(df_x,'red')
-    # plt.plot(pre_result,'blue')
-    # plt.show()
-
+        for j in range(len(df_temp)):
+            result.append(pre_result[j] - df_temp[j])
+    # 补齐可能会缺失的部分
+    for i in range(1):
+        df_temp=list(df_x[number*length:])
+        pre_result=wavelet(df_temp)
+        for j in range(len(df_temp)):
+            result.append(pre_result[j]-df_temp[j])
     return result
 
 
-def get_af_set(df, column_name, period=24):
+def get_af_set(df, column_name, period=24, oneDayLength=24):
     result = []
     # 由于tsd最后period/2个数字是nan 所以其他的都要删除最后period/2对齐
     # 两种diff 1 day 1 week
     print("now diff")
     minLength = len(df)
-    result.append(diff_predict(df=df, column_name=column_name, length=24)[:-12])
-    result.append(diff_predict(df=df, column_name=column_name, length=24 * 7)[:-12])
+    # 尾对齐长度
+    offsetLength = int(period / 2)
+    result.append(diff_predict(df=df, column_name=column_name, length=oneDayLength)[:-offsetLength])
+    result.append(diff_predict(df=df, column_name=column_name, length=oneDayLength * 7)[:-offsetLength])
     # 64种holt winters
     print("now holt winters")
     for i in range(2, 10, 2):
@@ -154,30 +163,31 @@ def get_af_set(df, column_name, period=24):
             for k in range(2, 10, 2):
                 result.append(holt_winter_predict(df=df, column_name=column_name, period=period,
                                                   smoothing_level=i / 10, smoothing_trend=j / 10,
-                                                  smoothing_seasonal=k / 10)[:-12])
+                                                  smoothing_seasonal=k / 10)[:-offsetLength])
+    print("now his and tsd")
     for i in range(1, 5):
-        print("now his and tsd")
-        result.append(his_average_predict(df=df, column_name=column_name, length=24 * 7 * i)[:-12])
-        result.append(his_median_predict(df=df, column_name=column_name, length=24 * 7 * i)[:-12])
+        result.append(his_average_predict(df=df, column_name=column_name, length=oneDayLength * 7 * i)[:-offsetLength])
+        result.append(his_median_predict(df=df, column_name=column_name, length=oneDayLength * 7 * i)[:-offsetLength])
         # # 两种tsd不用尾对齐
-        result.append(tsd_predict(df=df, column_name=column_name, length=24 * 7 * i, period=period))
-        result.append(tsd_median_predict(df=df, column_name=column_name, length=24 * 7 * i, period=period))
+        result.append(tsd_predict(df=df, column_name=column_name, length=oneDayLength * 7 * i, period=period))
+        result.append(tsd_median_predict(df=df, column_name=column_name, length=oneDayLength * 7 * i, period=period))
 
     print("now wavelet")
-    result.append(wavelet_predict(df=df, column_name=column_name, length=1500))
+    for i in range(1, 8, 2):
+        result.append(wavelet_predict(df=df, column_name=column_name, length=oneDayLength*i)[:-offsetLength])
 
     for item in result:
         minLength = min(minLength, len(item))
-        # print(minLength)
+    print('当前有效长度是:',minLength)
     af_set = []
     for item in result:
         af_set.append(item[len(item) - minLength:])
     return af_set
 
 
-def get_result(df, column_name_x, column_name_y):
-    afx_set = get_af_set(df=df, column_name=column_name_x)
-    afy_set = get_af_set(df=df, column_name=column_name_y)
+def get_result(df, column_name_x, column_name_y, oneDayLength=24):
+    afx_set = get_af_set(df=df, column_name=column_name_x, oneDayLength=oneDayLength)
+    afy_set = get_af_set(df=df, column_name=column_name_y, oneDayLength=oneDayLength)
     return afx_set, afy_set
 
 

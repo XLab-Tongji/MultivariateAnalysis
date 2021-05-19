@@ -9,7 +9,7 @@ startValueC = -180
 listA = list()
 listB = list()
 listC = list()
-for i in range(1500):
+for i in range(800):
     listA.append(np.sin(startValueA * np.pi / 180))
     listB.append(np.sin(startValueB * np.pi / 180))
     listC.append(np.sin(startValueC * np.pi / 180))

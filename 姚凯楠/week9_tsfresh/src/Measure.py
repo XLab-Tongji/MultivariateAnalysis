@@ -33,7 +33,7 @@ class CorrelationMeasurement():
             summ += Gs[index] * H[index]
         return summ
 
-    # RuntimeWarning: invalid value encountered in double_scalars åˆ†æ¯ä¸ºé›¶çš„å¤„ç†
+    # RuntimeWarning: invalid value encountered in double_scalars ·ÖÄ¸ÎªÁãµÄ´¦Àí
     def CC(self, G, H, Gs):
         return self.R(Gs, H) / math.sqrt(self.R(G, G) * self.R(H, H))
 
@@ -71,11 +71,17 @@ class CorrelationMeasurement():
         cnt = 0
         for afx in afx_set:
             for afy in afy_set:
-                result_set.append(self.FCC(self.amplification(0.5, 10, afx), self.amplification(0.5, 10, afy)))
+                if len(afx) == 0 or len(afy) == 0:
+                    continue
+                else:
+                    result_set.append(self.FCC(self.amplification(0.5, 10, afx), self.amplification(0.5, 10, afy)))
                 # print(cnt)
                 cnt += 1
         maxv = 0
         minv = 0
+        if len(result_set) == 0:
+            print("no effective result")
+            return
         for result in result_set:
             maxv = max(maxv, result[0])
             minv = min(minv, result[0])
@@ -84,7 +90,7 @@ class CorrelationMeasurement():
         else:
             ccV, shiftV = min(result_set)
 
-        # print(ccV)
+            # print(ccV)
         if abs(ccV) >= self.coTHR:
             if ccV >= 0:
                 return (1, shiftV)
@@ -95,7 +101,7 @@ class CorrelationMeasurement():
 
 
 if __name__ == '__main__':
-    afx_set =  [[0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0]]
+    afx_set = [[0, 0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0]]
 
     afy_set = [[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
                [[0, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0]],
