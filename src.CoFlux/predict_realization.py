@@ -17,7 +17,7 @@ def holt_winter_predict(df, column_name, period, smoothing_level=0.6, smoothing_
     result = []
     train_init_length = period * 7
     # 分段预测 每段预测后period个值 训练长度为period*7
-    for i in range(int((len(df) - train_init_length) / period)):
+    for i in range(int((len(df) - train_init_length) / period) - 1):
         train_length = train_init_length + i * period
         train_data = df[i * period:train_length]
         test_data = df[train_length:train_length + period]
@@ -35,21 +35,25 @@ def holt_winter_predict(df, column_name, period, smoothing_level=0.6, smoothing_
         for index in range(len(l1)):
             result.append(l1[index] - l2[index])
 
-    j = int((len(df) - train_init_length) / period) - 1
+    j = int((len(df) - train_init_length) / period) - 2
     start = period * (j + 7 + 1)
     end = len(df)
     last_train_data = df[start - train_init_length:start]
     last_test_data = df[start:end]
     last_copy = last_test_data.copy()
+    if len(last_train_data) < period:
+        return result
+
     fit_model = ExponentialSmoothing(np.asarray(last_train_data[column_name]),
                                      seasonal_periods=period, trend='add', seasonal='add')
     fit_data = fit_model.fit(smoothing_level=smoothing_level, smoothing_seasonal=smoothing_seasonal,
                              smoothing_trend=smoothing_trend)
-    last_copy['Holt_Winter'] = fit_data.forecast(len(last_test_data))
-    l1 = list(last_copy['Holt_Winter'])
-    l2 = list(last_test_data[column_name])
-    for index in range(len(l1)):
-        result.append(l1[index] - l2[index])
+    if len(last_test_data) != 0:
+        last_copy['Holt_Winter'] = fit_data.forecast(len(last_test_data))
+        l1 = list(last_copy['Holt_Winter'])
+        l2 = list(last_test_data[column_name])
+        for index in range(len(l1)):
+            result.append(l1[index] - l2[index])
     return result
 
 
@@ -137,10 +141,10 @@ def wavelet_predict(df, column_name, length=24 * 1):
             result.append(pre_result[j] - df_temp[j])
     # 补齐可能会缺失的部分
     for i in range(1):
-        df_temp=list(df_x[number*length:])
-        pre_result=wavelet(df_temp)
+        df_temp = list(df_x[number * length:])
+        pre_result = wavelet(df_temp)
         for j in range(len(df_temp)):
-            result.append(pre_result[j]-df_temp[j])
+            result.append(pre_result[j] - df_temp[j])
     return result
 
 
@@ -171,11 +175,11 @@ def get_af_set(df, column_name, period, oneDayLength):
 
     print("now wavelet")
     for i in range(1, 8, 2):
-        result.append(wavelet_predict(df=df, column_name=column_name, length=oneDayLength*i)[:-offsetLength])
+        result.append(wavelet_predict(df=df, column_name=column_name, length=oneDayLength * i)[:-offsetLength])
 
     for item in result:
         minLength = min(minLength, len(item))
-    print('当前有效长度是:',minLength)
+    print('当前有效长度是:', minLength)
     af_set = []
     for item in result:
         af_set.append(item[len(item) - minLength:])
